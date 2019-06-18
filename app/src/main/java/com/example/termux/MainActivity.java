@@ -57,6 +57,7 @@ select * from jugadores;
 
 create user sergio;
 ALTER USER sergio WITH PASSWORD 'sergio';
+grant all privileges on database fifa to sergio;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  */
 public class MainActivity extends AppCompatActivity {
