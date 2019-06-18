@@ -29,6 +29,10 @@ import java.sql.Statement;
  * 			https://gist.github.com/Kartones/dd3ff5ec5ea238d4c546
  * 			https://www.a2hosting.es/kb/developer-corner/postgresql/connect-to-postgresql-from-the-command-line
  * 			https://www.makeuseof.com/tag/use-linux-command-line-android-termux/
+----------------------------------------------------------------------------------------------------
+				After Termux and Postgresql install:
+					mkdir -p $PREFIX/var/lib/postgresql
+					initdb $PREFIX/var/lib/postgresql
 				Starting the database
 					pg_ctl -D $PREFIX/var/lib/postgresql start
 				Similarly stop the database using
@@ -56,8 +60,8 @@ select * from jugadores;
 
 
 create user sergio;
-ALTER USER sergio WITH PASSWORD 'sergio';
-ALTER USER sergio WITH ENCRYPTED PASSWORD 'sergio';
+ALTER USER sergio WITH PASSWORD 'entrar';
+ALTER USER sergio WITH ENCRYPTED PASSWORD 'entrar';
 grant all privileges on database fifa to sergio;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  */
@@ -122,11 +126,13 @@ public class MainActivity extends AppCompatActivity {
 				//Connection conn = DriverManager.getConnection("jdbc:postgresql://192.168.0.4:5432/fifa", "test", "test");
 				//Connection conn = DriverManager.getConnection("jdbc:postgresql://192.168.0.4:5432/fifa", "postgres", "postgres");
 				//Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "postgres", "postgres");
-				Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "sergio", "pepe");
-				// USUARIO:		u0_a86
+				//Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "sergio", "entrar");
+				Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "u0_a87", "");
+				// USUARIO:		u0_a86, u0_a87
 				// PASSWORD:	???
 				//En el stsql se puede agregar cualquier consulta SQL deseada.
-				String stsql = "Select version()";
+				//String stsql = "Select version()";
+				String stsql = "Select * from jugadores";
 				Statement st = conn.createStatement();
 				final ResultSet rs = st.executeQuery(stsql);
 				rs.next();
@@ -137,7 +143,8 @@ public class MainActivity extends AppCompatActivity {
 					public void run() {
 						Log.e( "Postgre", "Con resultado" );
 						try {
-							txtData.setText("#" + rs.getString(1).toString() );
+							//txtData.setText("#" + rs.getString(1).toString() );
+							txtData.setText("#" + rs.getString(1).toString() + ": " + rs.getString(2).toString() );
 						} catch (SQLException e) {
 							Log.e( "Postgre", "In runOnUiThread -> BAD setText..." );
 							e.printStackTrace();
