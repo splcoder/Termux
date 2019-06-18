@@ -47,6 +47,17 @@ import java.sql.Statement;
 					   \g or terminate with semicolon to execute query
 					   \q to quit
 				postgres=# \? createdb
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+create database fifa;
+\c fifa;
+create table jugadores(id serial PRIMARY KEY, name VARCHAR(50) NOT NULL);
+insert into jugadores (name) VALUES ('Sergio');
+select * from jugadores;
+
+
+create user sergio;
+ALTER USER sergio WITH PASSWORD 'sergio';
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -106,21 +117,31 @@ public class MainActivity extends AppCompatActivity {
 				Log.e( "Postgre", "In the Thread -> Start" );
 				Class.forName("org.postgresql.Driver");
 				// "jdbc:postgresql://IP:PUERTO/DB", "USER", "PASSWORD");
-				Connection conn = DriverManager.getConnection("jdbc:postgresql://192.168.0.4:5432/fifa", "test", "test");
+				//Connection conn = DriverManager.getConnection("jdbc:postgresql://192.168.0.4:5432/fifa", "test", "test");
+				//Connection conn = DriverManager.getConnection("jdbc:postgresql://192.168.0.4:5432/fifa", "postgres", "postgres");
+				//Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "postgres", "postgres");
+				Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "sergio", "pepe");
+				// USUARIO:		u0_a86
+				// PASSWORD:	???
 				//En el stsql se puede agregar cualquier consulta SQL deseada.
 				String stsql = "Select version()";
 				Statement st = conn.createStatement();
-				ResultSet rs = st.executeQuery(stsql);
+				final ResultSet rs = st.executeQuery(stsql);
 				rs.next();
 				//---------------------------------------------------
 				Log.e( "Postgre", "Con resultado, fuera de runOnUiThread" );
-				/*runOnUiThread(new Runnable() {
+				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						//txtData.setText("#" + rs.getString(1));
 						Log.e( "Postgre", "Con resultado" );
+						try {
+							txtData.setText("#" + rs.getString(1).toString() );
+						} catch (SQLException e) {
+							Log.e( "Postgre", "In runOnUiThread -> BAD setText..." );
+							e.printStackTrace();
+						}
 					}
-				});*/
+				});
 				//---------------------------------------------------
 				//System.out.println( rs.getString(1) );
 				conn.close();
