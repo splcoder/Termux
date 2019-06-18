@@ -57,6 +57,7 @@ select * from jugadores;
 
 create user sergio;
 ALTER USER sergio WITH PASSWORD 'sergio';
+ALTER USER sergio WITH ENCRYPTED PASSWORD 'sergio';
 grant all privileges on database fifa to sergio;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  */
