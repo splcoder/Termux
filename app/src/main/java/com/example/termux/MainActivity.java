@@ -12,8 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-// TODO MIRAR SPACES:		http://jkorpela.fi/chars/spaces.html
-
 /*
  * Utilizar PostgreSQL en Android con JDBC
  * www.programacion.com.py - Recursos y documentación para desarrolladores - By Rodrigo Paszniuk
@@ -88,6 +86,8 @@ revoke all privileges on database fifa from sergio;
 		postgres=> \l
 	Postgres login commands
 		psql -d mydb -U myuser
+	To check login info
+		postgres-# \conninfo
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 				//Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "postgres", "postgres");
 				//Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "sergio", "entrar");
 				Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "sergio", "pepe2");	// TODO problema LA CONTRASEÑA SE LA SALTA POR EL FORRO !!!
-				//Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "u0_a86", "");
+				//Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "u0_a87", "");
 				// USUARIO:		u0_a86, u0_a87
 				// PASSWORD:	???
 				//En el stsql se puede agregar cualquier consulta SQL deseada.
