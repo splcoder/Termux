@@ -30,13 +30,24 @@ import java.sql.Statement;
  * 			https://www.a2hosting.es/kb/developer-corner/postgresql/connect-to-postgresql-from-the-command-line
  * 			https://www.makeuseof.com/tag/use-linux-command-line-android-termux/
 ----------------------------------------------------------------------------------------------------
-				After Termux and Postgresql install:
-					mkdir -p $PREFIX/var/lib/postgresql
-					initdb $PREFIX/var/lib/postgresql
+				After Termux install:
+					$ pkg install postgresql
+				And after Postgresql install (to start it first create your folder you want to store the data in and then init te folder):
+					$ mkdir -p $PREFIX/var/lib/postgresql
+					$ initdb $PREFIX/var/lib/postgresql
 				Starting the database
-					pg_ctl -D $PREFIX/var/lib/postgresql start
+					$ pg_ctl -D $PREFIX/var/lib/postgresql start
 				Similarly stop the database using
-					pg_ctl stop
+					$ pg_ctl stop
+				Create a user to allow you to connect form an App:
+					$ createuser --superuser --pwprompt yourUserName				<<< FALTA Replication y Bypass RLS
+				Show users:
+					$ psql posgres
+					$ postgres=# \du				>>> Gives: Superuser, Create role, Create DB, Replication, Bypass RLS
+				Create your database:
+					$ createdb mydb
+				Open your database
+					$ psql mydb
 
 				-----------------------------------------------------------
 				User-PC:~$ psql postgres
