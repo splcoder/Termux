@@ -40,7 +40,8 @@ import java.sql.Statement;
 				Similarly stop the database using
 					$ pg_ctl stop
 				Create a user to allow you to connect form an App:
-					$ createuser --superuser --pwprompt yourUserName				<<< FALTA Replication y Bypass RLS
+					$ createuser --superuser --pwprompt yourUserName	<<< NO <<< FALTA Replication y Bypass RLS
+					postgres=# create user sergio with login superuser createdb createrole replication bypassrls
 				Show users:
 					$ psql posgres
 					$ postgres=# \du				>>> Gives: Superuser, Create role, Create DB, Replication, Bypass RLS
@@ -74,7 +75,17 @@ create user sergio;
 ALTER USER sergio WITH PASSWORD 'entrar';
 ALTER USER sergio WITH ENCRYPTED PASSWORD 'entrar';
 grant all privileges on database fifa to sergio;
+revoke all privileges on database fifa from sergio;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Show all tables (of a db)
+		\dt
+	Programmatically (or from the psql interface too, of course):
+		SELECT * FROM pg_catalog.pg_tables;
+----------------------------------------------------------------------------------------------------
+	List of databases
+		postgres=> \l
+	Postgres login commands
+		psql -d mydb -U myuser
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -138,7 +149,8 @@ public class MainActivity extends AppCompatActivity {
 				//Connection conn = DriverManager.getConnection("jdbc:postgresql://192.168.0.4:5432/fifa", "postgres", "postgres");
 				//Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "postgres", "postgres");
 				//Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "sergio", "entrar");
-				Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "u0_a87", "");
+				Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "sergio", "pepe2");	// TODO problema LA CONTRASEÑA SE LA SALTA POR EL FORRO !!!
+				//Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "u0_a86", "");
 				// USUARIO:		u0_a86, u0_a87
 				// PASSWORD:	???
 				//En el stsql se puede agregar cualquier consulta SQL deseada.
@@ -148,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
 				final ResultSet rs = st.executeQuery(stsql);
 				rs.next();
 				//---------------------------------------------------
-				Log.e( "Postgre", "Con resultado, fuera de runOnUiThread" );
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
@@ -163,13 +174,10 @@ public class MainActivity extends AppCompatActivity {
 					}
 				});
 				//---------------------------------------------------
-				//System.out.println( rs.getString(1) );
 				conn.close();
 			} catch (SQLException se) {
-				//System.out.println("oops! No se puede conectar. Error: " + se.toString());
 				Log.e( "Postgre", "No se puede conectar" );
 			} catch (ClassNotFoundException e) {
-				//System.out.println("oops! No se encuentra la clase. Error: " + e.getMessage());
 				Log.e( "Postgre", "No se encuentra la clase" );
 			} catch( Exception e ){
 				Log.e( "Postgre", "Exception -> " + e.toString() );
