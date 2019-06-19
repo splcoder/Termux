@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+// TODO MIRAR SPACES:		http://jkorpela.fi/chars/spaces.html
+
 /*
  * Utilizar PostgreSQL en Android con JDBC
  * www.programacion.com.py - Recursos y documentación para desarrolladores - By Rodrigo Paszniuk
