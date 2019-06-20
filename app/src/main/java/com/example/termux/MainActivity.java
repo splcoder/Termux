@@ -29,6 +29,8 @@ import java.sql.Statement;
  * 			https://gist.github.com/Kartones/dd3ff5ec5ea238d4c546
  * 			https://www.a2hosting.es/kb/developer-corner/postgresql/connect-to-postgresql-from-the-command-line
  * 			https://www.makeuseof.com/tag/use-linux-command-line-android-termux/
+ * 			https://stackoverflow.com/questions/17469424/import-sql-file-in-postgres-using-i-command-from-java
+ * 			http://zetcode.com/java/postgresql/
 ----------------------------------------------------------------------------------------------------
 				After Termux install:
 					$ pkg install postgresql
