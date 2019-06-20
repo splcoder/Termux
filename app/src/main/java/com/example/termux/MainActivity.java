@@ -42,6 +42,13 @@ import java.sql.Statement;
 				Create a user to allow you to connect form an App:
 					$ createuser --superuser --pwprompt yourUserName	<<< NO <<< FALTA Replication y Bypass RLS
 					postgres=# create user sergio with login superuser createdb createrole replication bypassrls
+				$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+				How do I rename postgres user to root ?
+					createuser --superuser root
+					psql> create database root owner root					<<<<<<<<<<<<<<<<<<<<<<<<
+				After that, when logged in as root, you should be able to do what you want with the postgres user:
+					ALTER USER postgres RENAME TO olduser
+				$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 				Show users:
 					$ psql posgres
 					$ postgres=# \du				>>> Gives: Superuser, Create role, Create DB, Replication, Bypass RLS
@@ -151,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 				//Connection conn = DriverManager.getConnection("jdbc:postgresql://192.168.0.4:5432/fifa", "postgres", "postgres");
 				//Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "postgres", "postgres");
 				//Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "sergio", "entrar");
-				Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "sergio", "pepe2");	// TODO problema LA CONTRASEÑA SE LA SALTA POR EL FORRO !!!
+				Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "sergio", "asdasdsd");	// TODO problema LA CONTRASEÑA SE LA SALTA POR EL FORRO !!!
 				//Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/fifa", "u0_a87", "");
 				// USUARIO:		u0_a86, u0_a87
 				// PASSWORD:	???
